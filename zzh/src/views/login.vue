@@ -5,20 +5,20 @@
       <div class="chender">
         <h2>梦学谷会员管理系统</h2>
         <el-form
-          :model="ruleForm"
+          :model="form"
           :rules="rules"
           ref="ruleForm"
           label-width="80px"
           class="demo-ruleForm"
         >
-          <el-form-item label="活动名称" prop="username">
-            <el-input v-model="ruleForm.username"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="form.username"></el-input>
           </el-form-item>
-          <el-form-item label="活动名称" prop="password">
-            <el-input v-model="ruleForm.password"></el-input>
+          <el-form-item label="密码" prop="password">
+            <el-input v-model="form.password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm">立即创建</el-button>
+            <el-button type="primary" @click="submitForm">登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -33,18 +33,18 @@ export default {
   components: {},
   data() {
     return {
-      ruleForm: {
+      form: {
         username: "",
         password: "",
       },
       rules: {
         username: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
         password: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { required: true, message: "请输入活密码", trigger: "blur" },
+          { min: 3, max: 6, message: "长度在 3 到 6 个字符", trigger: "blur" },
         ],
       },
     };
@@ -54,9 +54,10 @@ export default {
   methods: {
     // 登录
     submitForm() {
-      login(this.ruleForm).then((res) => {
-        console.log(res);
-      });
+      login(this.form).then((res) => {
+      console.log(res);
+      this.$router.push('/')
+    });
     },
   },
 };
